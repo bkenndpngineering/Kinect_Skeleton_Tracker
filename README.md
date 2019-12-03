@@ -1,7 +1,7 @@
 # Kinect-Skeleton-Tracker
 Module for using Kinect for general purpose skeleton tracking
 
-**Note: While the general format of this will be the same as the Kinetic Maze project, the files are not interchangeable**
+**Note: While the general format of this will be the same as the Kinetic Maze project and Kinect Library, the files are not interchangeable**
 
 ## Dependencies
 [Libfreenect](https://github.com/OpenKinect/libfreenect),
@@ -27,4 +27,5 @@ Module for using Kinect for general purpose skeleton tracking
 ## Todo
 - [x] Modify tracking-module code to return full body data instead of just hands
 - [ ] (Re)write Python parser for new tracking module
+- [ ] Modify tracker.py
 - [ ] Write skeleton display - pygame
