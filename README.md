@@ -4,7 +4,8 @@ Module for using Kinect for general purpose skeleton tracking
 
 ## Dependencies
 [Libfreenect](https://github.com/OpenKinect/libfreenect),
-[Openni2](https://github.com/occipital/openni2)
+[Openni2](https://github.com/occipital/openni2),
+[NiTE2](http://jaist.dl.sourceforge.net/project/roboticslab/External/nite/NiTE-Linux-x64-2.2.tar.bz2)
 
 ## Organization
 ### Plans
