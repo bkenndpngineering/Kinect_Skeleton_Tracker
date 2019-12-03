@@ -3,7 +3,7 @@ Module for using Kinect for general purpose skeleton tracking
 
 
 ## Dependencies
-[Libfreenect](https://github.com/OpenKinect/libfreenect)
+[Libfreenect](https://github.com/OpenKinect/libfreenect),
 [Openni2](https://github.com/occipital/openni2)
 
 ## Organization
@@ -14,3 +14,5 @@ Using libfreenect, the kinect camera, send the image the kinect sees to a Neural
 
 ## Todo
 - [x] Modify tracking-module code to return full body data instead of just hands
+- [ ] (Re)write Python parser for new tracking module
+- [ ] Write skeleton display - pygame
