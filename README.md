@@ -3,8 +3,8 @@ Module for using Kinect for general purpose skeleton tracking
 
 
 ## Dependencies
-[Libfreenect] (https://github.com/OpenKinect/libfreenect)
-[Openni2] (https://github.com/occipital/openni2)
+[Libfreenect](https://github.com/OpenKinect/libfreenect)
+[Openni2](https://github.com/occipital/openni2)
 
 ## Organization
 ### Plans
