@@ -102,7 +102,7 @@ class Tracker(object):
                 continue
             line = line.replace(PREFIX, b"", 1)
             if line.startswith(BODY_DATA):
-                u = self.decode(line.replace(HAND_DATA, b"", 1))
+                u = self.decode(line.replace(BODY_DATA, b"", 1))
                 users[u.user_id] = u
             elif line.startswith(FRAME_END):
                 break
@@ -123,7 +123,7 @@ class Tracker(object):
         try:
             while True:
                 users = self.get_frame()
-                yield users
+                yield self.returnUser(users)
         finally:
             l.warn("Killing process after exception")
             self.proc.kill()
@@ -166,4 +166,11 @@ class Tracker(object):
         if u:
             delta = u.left_hand - u.right_hand
             return math.atan2(delta[1], delta[0])
+        return None
+
+    @classmethod
+    def returnUser(cls, users):
+        u = cls.find_optimal_user(users)
+        if u:
+            return u.head, u.neck, u.torso, u.left_shoulder, u.left_elbow, u.left_hand, u.right_shoulder, u.right_elbow, u.right_hand, u.left_hip, u.left_knee, u.left_foot, u.right_hip, u.right_knee, u.right_foot
         return None
