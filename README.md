@@ -26,7 +26,7 @@ Module for using Kinect for general purpose skeleton tracking
 
 ## Todo
 - [x] Modify tracking-module code to return full body data instead of just hands
-- [ ] (Re)write Python parser for new tracking module
-- [ ] Modify tracker.py
+- [x] (Re)write Python parser for new tracking module
+- [x] Modify tracker.py
 - [x] Modify tracked_user.py
 - [ ] Write skeleton display - pygame
