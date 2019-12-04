@@ -56,6 +56,7 @@ def capture_coordinates(ut, j):
     #print(coordinate_dict)
 
 def calculate_angle(j1_name, j2_name):
+    # takes string, keys to the coordinate_dict
     # returns degrees, angle relative to x axis
     j1_coordinates = coordinate_dict[str(j1_name)]
     j2_coordinates = coordinate_dict[str(j2_name)]
@@ -73,9 +74,9 @@ def calculate_angle(j1_name, j2_name):
     theta = math.atan(o/a)
 
     return math.degrees(theta)
-
-
 ################################################
+
+
 def parse_arg():
     parser = argparse.ArgumentParser(description='Test OpenNI2 and NiTE2.')
     parser.add_argument('-w', '--window_width', type=int, default=1024,
