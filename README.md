@@ -94,6 +94,7 @@ Original instructions can be found in install_instructions.txt!
 
 - [ ] Fix the JSON, delete the physics and dab code
 - [ ] Rename trackhands to trackbody, modify trackers to use new name
+- [ ] Update gitignore to ignore more files 
 
 ## Notes
 When running the code, it displays all the data but claims an error and "invalid line," will disregard and move on to skeleton drawing
