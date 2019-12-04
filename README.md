@@ -98,3 +98,5 @@ Original instructions can be found in install_instructions.txt!
 ## Notes
 When running the code, it displays all the data but claims an error and "invalid line," will disregard and move on to skeleton drawing
 The plan is to draw each line between joints as the same length, but change the angle of display and a fixed point. first fixed point will be the torso, at 0,0 or something
+
+ERROR   | 2019-12-04 12:04:09,139 | skeleton_tracker.tracker | invalid line: b'BODY DATA: 1|(-17.44, 350.42, 932.55)|(-49.54, 131.72, 943.17)|(-71.62, -96.91, 947.37)|(93.86, 119.25, 1017.80)|(137.14, -184.46, 1070.43)|(204.34, -501.58, 1043.09)|(-192.95, 144.20, 868.54)|(-276.34, -146.31, 831.78)|(-281.21, -468.98, 769.79)|( 0.08, -333.71, 1000.37)|( 0.08, -793.19, 1000.37)|( 0.08, -1235.00, 1000.25)|(-187.48, -317.39, 902.76)|(-187.48, -776.87, 902.76)|(-187.47, -1218.68, 902.73)'

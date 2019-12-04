@@ -54,7 +54,7 @@ class Skeleton:
 
     def jointAngle(self,one,two):
         delta = two - one
-        return math.atan2(delta[1], delta[0])
+        return math.atan2(delta[1], delta[0]) * 45 #Needs to be tuned a bit
 
     def angleLine(self,startx,starty, angle): #draw a line at an angle with fixed start point
         end = startx + 5*math.cos(angle),starty + 5*math.sin(angle) #location of the nonfixed end
@@ -69,6 +69,19 @@ class Skeleton:
 
     def drawSkel(self): #untested as of 12/2/2019
 
+        torso = (400,400)
+
+        lshoulderEP = self.returnLineEnd(torso, self.jointAngle(self.torso,self.left_shoulder)) #EP for end point, to reduce variable confusion
+        rshoulderEP = self.returnLineEnd(torso, self.jointAngle(self.torso,self.right_shoulder))
+        lhipEP = self.returnLineEnd(torso, self.jointAngle(self.torso,self.left_hip))
+        rhipEP = self.returnLineEnd(torso, self.jointAngle(self.torso,self.right_hip))
+
+        #Torso/shoulders/hips, in blue
+        pygame.draw.lines(screen, Color("blue"), True, [torso, lshoulderEP, rshoulderEP])
+        pygame.draw.lines(screen, Color("blue"), True, [torso, lhipEP, rhipEP])
+
+
+        '''
         linCover = pygame.surface.Surface((720,600)).convert()
         linCover.fill((0, 0, 0))
         screen.blit(linCover, (0,100))
@@ -76,8 +89,8 @@ class Skeleton:
         #pygame.draw.line(screen, Color("yellow"), (400,300), (400,500), 1)
 
 
-        torso = (400,400)
-        shoulder = self.returnLeftEnd(torso, self.jointAngle(self.t,self.ls)  * 45)
+
+
         elbow = self.returnLeftEnd(shoulder, self.jointAngle(self.ls,self.le)  * 45)
         hand = self.returnLeftEnd(elbow, self.jointAngle(self.le,self.lh)  * 45)
         leftPoints = [shoulder, elbow, hand]
@@ -86,14 +99,14 @@ class Skeleton:
         # left arm works-ish, shoulder line goes straight down but else tracks well.
 
 
-        rshoulder = self.returnRightEnd(torso, self.jointAngle(self.t,self.rs) * 45)
+
         relbow = self.returnRightEnd(rshoulder, self.jointAngle(self.rs,self.re)  * 45)
         rhand = self.returnRightEnd(relbow, self.jointAngle(self.re,self.rh)  * 45)
         rightPoints = [rshoulder, relbow, rhand]
 
         pygame.draw.lines(screen, Color("red"), False, rightPoints)
+        '''
 
-        pygame.draw.lines(screen, Color("blue"), True, [torso, shoulder, rshoulder])
 
 
         pygame.display.update()

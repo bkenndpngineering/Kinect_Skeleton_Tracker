@@ -15,7 +15,7 @@ from .tracked_user import WorldTrackedUser
 l = logger.getChild("tracker")
 
 PREFIX = b"HT! "
-HAND_DATA = b"HAND DATA: "
+BODY_DATA = b"BODY DATA: "
 SEP_CHAR = b"|"
 FRAME_END = b"FRAME END"
 
@@ -101,7 +101,7 @@ class Tracker(object):
             if not line.startswith(PREFIX):
                 continue
             line = line.replace(PREFIX, b"", 1)
-            if line.startswith(HAND_DATA):
+            if line.startswith(BODY_DATA):
                 u = self.decode(line.replace(HAND_DATA, b"", 1))
                 users[u.user_id] = u
             elif line.startswith(FRAME_END):
