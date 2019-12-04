@@ -67,7 +67,11 @@ class Skeleton:
         #image flipped?
 
 
-    def drawSkel(self): #untested as of 12/2/2019
+    def drawSkel(self):
+
+        linCover = pygame.surface.Surface((720,600)).convert()
+        linCover.fill((0, 0, 0))
+        screen.blit(linCover, (0,100))
 
         torso = (400,400)
 
@@ -80,32 +84,35 @@ class Skeleton:
         pygame.draw.lines(screen, Color("blue"), True, [torso, lshoulderEP, rshoulderEP])
         pygame.draw.lines(screen, Color("blue"), True, [torso, lhipEP, rhipEP])
 
+        #head + neck, in white. MAKE THIS DRAW A CIRCLE ON THE TORSO TRIANGLE
+        neckEP = self.returnLineEnd(torso, self.jointAngle(self.torso,self.neck))
+        headEP = self.returnLineEnd(torso, self.jointAngle(self.neck,self.head))
+        pygame.draw.lines(screen, Color("white"), False, [torso, neckEP, headEP])
 
-        '''
-        linCover = pygame.surface.Surface((720,600)).convert()
-        linCover.fill((0, 0, 0))
-        screen.blit(linCover, (0,100))
-
-        #pygame.draw.line(screen, Color("yellow"), (400,300), (400,500), 1)
-
-
-
-
-        elbow = self.returnLeftEnd(shoulder, self.jointAngle(self.ls,self.le)  * 45)
-        hand = self.returnLeftEnd(elbow, self.jointAngle(self.le,self.lh)  * 45)
-        leftPoints = [shoulder, elbow, hand]
-
-        pygame.draw.lines(screen, Color("green"), False, leftPoints)
-        # left arm works-ish, shoulder line goes straight down but else tracks well.
+        #arms, in green and red for left and right
+        lelbowEP = self.returnLineEnd(lshoulderEP, self.jointAngle(self.left_shoulder,self.left_elbow))
+        lhandEP = self.returnLineEnd(lelbowEP, self.jointAngle(self.left_elbow,self.left_hand))
+        leftArmPoints = [lshoulderEP, lelbowEP, lhandEP]
+        pygame.draw.lines(screen, Color("green"), False, leftArmPoints) # left arm works-ish, shoulder line goes straight down but else tracks well.
 
 
+        relbowEP = self.returnLineEnd(rshoulderEP, self.jointAngle(self.right_shoulder,self.right_elbow))
+        rhandEP = self.returnLineEnd(relbowEP, self.jointAngle(self.right_elbow,self.right_hand))
+        rightArmPoints = [rshoulderEP, relbowEP, rhandEP]
+        pygame.draw.lines(screen, Color("red"), False, rightArmPoints) #right arm is very glitchy and inaccurate
 
-        relbow = self.returnRightEnd(rshoulder, self.jointAngle(self.rs,self.re)  * 45)
-        rhand = self.returnRightEnd(relbow, self.jointAngle(self.re,self.rh)  * 45)
-        rightPoints = [rshoulder, relbow, rhand]
+        #legs, in gold and pink for left and right
+        lkneeEP = self.returnLineEnd(lhipEP, self.jointAngle(self.left_hip,self.left_knee))
+        lfootEP = self.returnLineEnd(lkneeEP, self.jointAngle(self.left_knee,self.left_foot))
+        leftLegPoints = [lhipEP, lkneeEP, lfootEP]
+        pygame.draw.lines(screen, Color("gold"), False, leftLegPoints) # left arm works-ish, shoulder line goes straight down but else tracks well.
 
-        pygame.draw.lines(screen, Color("red"), False, rightPoints)
-        '''
+
+        rkneeEP = self.returnLineEnd(rhipEP, self.jointAngle(self.right_hip,self.right_knee))
+        rfootEP = self.returnLineEnd(rkneeEP, self.jointAngle(self.right_knee,self.right_foot))
+        rightLegPoints = [rhipEP, rkneeEP, rfootEP]
+        pygame.draw.lines(screen, Color("deeppink"), False, rightLegPoints) #right arm is very glitchy and inaccurate
+
 
 
 

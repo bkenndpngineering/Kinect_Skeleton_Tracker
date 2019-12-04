@@ -3,7 +3,7 @@ from .config import global_config as c
 from . import logger
 import os
 
-from . import Skeleton
+from .draw import Skeleton
 sk = Skeleton()
 
 
