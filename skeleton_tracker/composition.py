@@ -16,4 +16,4 @@ class Kinect:
         self.tracker = Tracker(self.tracker_path, self.tracker_wd)
         l.info("Starting main loop")
         for user in self.tracker.stream():
-            print(user)
+            print(user.returnUser())

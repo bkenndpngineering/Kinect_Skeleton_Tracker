@@ -11,6 +11,9 @@ Module for using Kinect for general purpose skeleton tracking
 **Installation instructions coming soon!**
 
 ## Organization
+
+#File descriptions - short
+
 * /skeleton_tracker - Python Folder
   * /skeleton_tracker/\_\_init\_\_.py
   * /skeleton_tracker/\_\_main\_\_.py  - The file that is run by run_tracker.sh
@@ -27,7 +30,7 @@ Module for using Kinect for general purpose skeleton tracking
 * /README.md - Readme
 * /run_tracker.sh - Used to run the tracker (the entire project)
 
-
+#File descriptions - long (as needed)
 
 
 ## Todo
@@ -41,5 +44,5 @@ Module for using Kinect for general purpose skeleton tracking
 - [ ] Rename trackhands to trackbody, modify trackers to use new name
 
 ## Notes
-Braedon has built driver, need to install into OpenNI
-When running the coce, it displays all the data but claims an error and "invalid line," will disregard and move on to skeleton drawing
+When running the code, it displays all the data but claims an error and "invalid line," will disregard and move on to skeleton drawing
+The plan is to draw each line between joints as the same length, but change the angle of display and a fixed point. first fixed point will be the torso, at 0,0 or something

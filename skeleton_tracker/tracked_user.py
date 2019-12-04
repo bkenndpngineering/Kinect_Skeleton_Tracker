@@ -57,6 +57,13 @@ class TrackedUser(object):
     def right_arm(self):
         return self.right_hand - self.right_shoulder
 
+    def returnUser(self):
+        return self.head, self.neck, self.torso,
+                self.left_shoulder, self.left_elbow, self.left_hand,
+                self.right_shoulder, self.right_elbow, self.right_hand,
+                self.left_hip, self.left_knee, self.left_foot,
+                self.right_hip, self.right_knee, self.right_foot
+
 
 class WorldTrackedUser(TrackedUser):
     def __init__(self, user_id,
