@@ -8,11 +8,16 @@ import argparse
 from openni import openni2, nite2, utils
 import numpy as np
 import cv2
+from threading import Thread
+import math
 
 GRAY_COLOR = (64, 64, 64)
 CAPTURE_SIZE_KINECT = (512, 424)
 CAPTURE_SIZE_OTHERS = (640, 480)
 
+
+############ BK junk ###############
+# dictionary updated as the joints are drawn
 coordinate_dict = {"HEAD": (None, None),
                     "NECK": (None, None),
                     "LEFT_SHOULDER": (None, None),
@@ -47,10 +52,30 @@ def capture_coordinates(ut, j):
 
     #print(key)
 
-    print()
-    print(coordinate_dict)
+    #print()
+    #print(coordinate_dict)
+
+def calculate_angle(j1_name, j2_name):
+    # returns degrees, angle relative to x axis
+    j1_coordinates = coordinate_dict[str(j1_name)]
+    j2_coordinates = coordinate_dict[str(j2_name)]
+
+    if (j1_coordinates[0] == None) or (j1_coordinates[1] == None):
+        print("first joint has no coordinates")
+        return
+    elif (j2_coordinates[0] == None) or (j2_coordinates[1] == None):
+        print("first joint has no coordinates")
+        return
+
+    # top minus bottom, y axis in inverted (0,0) is top left i think
+    o = abs(j1_coordinates[1]-j2_coordinates[1]) # difference in y coordinates
+    a = abs(j1_coordinates[0]-j2_coordinates[0]) # difference in x coordinates
+    theta = math.atan(o/a)
+
+    return math.degrees(theta)
 
 
+################################################
 def parse_arg():
     parser = argparse.ArgumentParser(description='Test OpenNI2 and NiTE2.')
     parser.add_argument('-w', '--window_width', type=int, default=1024,
@@ -177,4 +202,12 @@ def capture_skeleton():
     cv2.destroyAllWindows()  # close OpenCV window
 
 if __name__ == '__main__':
-    capture_skeleton()
+    # capture and display skeleton data on its own thread
+    skeleton_tracker_thread = Thread(target=capture_skeleton, args=())
+    skeleton_tracker_thread.start()
+    #skeleton_tracker_thread.join()
+
+    while 1:
+        print(calculate_angle("LEFT_HAND", "RIGHT_HAND"))
+
+    #capture_skeleton()
