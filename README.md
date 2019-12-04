@@ -92,8 +92,10 @@ Original instructions can be found in install_instructions.txt!
 - [x] Modify tracked_user.py
 - [x] Write skeleton display - pygame
 - [ ] Make skeleton display better
+- [ ] Add limb length setting in the endpoint calc
+- [ ] Make head drawing a neck and circle, not to limbs
+- [ ] Fix the slouch
 
-(Current issues with skeleton: Head drawing needs to be updated to not use a limb, constant slouch breaks all right side tracking)
 
 - [ ] Fix the JSON, delete the physics and dab code
 - [ ] Rename trackhands to trackbody, modify trackers to use new name

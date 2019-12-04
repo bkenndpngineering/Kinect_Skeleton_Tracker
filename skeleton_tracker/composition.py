@@ -22,6 +22,5 @@ class Kinect:
         for user in self.tracker.stream():
             if (user is not None):
                 head, neck, torso, lshoulder, lelbow, lhand, rshoulder, relbow, rhand, lhip, lknee, lfoot, rhip, rknee, rfoot = user
-
                 sk.updateSk(head, neck, torso, lshoulder, lelbow, lhand, rshoulder, relbow, rhand, lhip, lknee, lfoot, rhip, rknee, rfoot)
                 sk.drawSkel()
