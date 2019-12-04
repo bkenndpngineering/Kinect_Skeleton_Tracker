@@ -8,6 +8,8 @@ Module for using Kinect for general purpose skeleton tracking
 [Openni2](https://github.com/occipital/openni2),
 [NiTE2](http://jaist.dl.sourceforge.net/project/roboticslab/External/nite/NiTE-Linux-x64-2.2.tar.bz2)
 
+**Installation instructions coming soon!**
+
 ## Organization
 * /skeleton_tracker - Python Folder
   * /skeleton_tracker/\_\_init\_\_.py
@@ -17,6 +19,7 @@ Module for using Kinect for general purpose skeleton tracking
   * /skeleton_tracker/config.py - Reads config? Unsure of exactly what it does outside of being a config
   * /skeleton_tracker/tracked_user.py - Classes for assigning data to the active user
   * /skeleton_tracker/tracker.py - Converts tracking module (C) data to be used by python
+  * /skeleton_tracker/draw.py - Pygame code to draw the skeleton tracked
 * /tracking-module - C Tracker Folder
   * /tracking-module/main.cpp - C source code
   * /tracking-module/Makefile
@@ -35,3 +38,8 @@ Module for using Kinect for general purpose skeleton tracking
 - [ ] Write skeleton display - pygame
 
 - [ ] Fix the JSON, delete the physics and dab code
+- [ ] Rename trackhands to trackbody, modify trackers to use new name
+
+## Notes
+Braedon has built driver, need to install into OpenNI
+When running the coce, it displays all the data but claims an error and "invalid line," will disregard and move on to skeleton drawing

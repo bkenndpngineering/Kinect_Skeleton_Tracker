@@ -1,3 +1,3 @@
 
 all:
-	g++ -o trackbody main.cpp -lNiTE2 -lOpenNI2
+	g++ -o trackhands main.cpp -lNiTE2 -lOpenNI2
