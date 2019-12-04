@@ -48,7 +48,7 @@ class Tracker(object):
                                 _parse_coords(parts[12]), # lfoot
                                 _parse_coords(parts[13]), # rhip
                                 _parse_coords(parts[14]), # rknee
-                                _parse_coords(parts[15]), # rfoot
+                                _parse_coords(parts[15])) # rfoot
 
     @staticmethod
     def flip_user(u):
@@ -123,7 +123,7 @@ class Tracker(object):
         try:
             while True:
                 users = self.get_frame()
-                yield self.find_hand_angle(users)
+                yield users
         finally:
             l.warn("Killing process after exception")
             self.proc.kill()

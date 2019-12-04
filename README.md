@@ -12,6 +12,9 @@ Module for using Kinect for general purpose skeleton tracking
 * /skeleton_tracker - Python Folder
   * /skeleton_tracker/\_\_init\_\_.py
   * /skeleton_tracker/\_\_main\_\_.py  - The file that is run by run_tracker.sh
+  * /skeleton_tracker/composition.py - File containing class with main loops
+  * /skeleton_tracker/config.json - A config file, if modified breaks the Json decoder.
+  * /skeleton_tracker/config.py - Reads config? Unsure of exactly what it does outside of being a config
   * /skeleton_tracker/tracked_user.py - Classes for assigning data to the active user
   * /skeleton_tracker/tracker.py - Converts tracking module (C) data to be used by python
 * /tracking-module - C Tracker Folder
@@ -30,3 +33,5 @@ Module for using Kinect for general purpose skeleton tracking
 - [x] Modify tracker.py
 - [x] Modify tracked_user.py
 - [ ] Write skeleton display - pygame
+
+- [ ] Fix the JSON, delete the physics and dab code
