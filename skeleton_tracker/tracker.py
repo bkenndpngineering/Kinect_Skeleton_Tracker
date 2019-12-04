@@ -56,17 +56,34 @@ class Tracker(object):
             x = -(p[0] - center[0]) + center[0]
             return point(x, p[1], p[2])
 
-        rh = _flip(u.left_hand, u.torso)
-        lh = _flip(u.right_hand, u.torso)
-        re = _flip(u.left_elbow, u.torso)
-        le = _flip(u.right_elbow, u.torso)
-        rs = _flip(u.left_shoulder, u.torso)
+        h = _flip(u.head, u.torso)
+        n = _flip(u.neck, u.torso)
+
         ls = _flip(u.right_shoulder, u.torso)
+        le = _flip(u.right_elbow, u.torso)
+        lh = _flip(u.right_hand, u.torso)
+
+        rs = _flip(u.left_shoulder, u.torso)
+        re = _flip(u.left_elbow, u.torso)
+        rh = _flip(u.left_hand, u.torso)
+
+        lhip = _flip(u.right_hip, u.torso)
+        lk = _flip(u.right_knee, u.torso)
+        lf = _flip(u.right_foot, u.torso)
+
+        rhip = _flip(u.right_hip, u.torso)
+        rk = _flip(u.right_knee, u.torso)
+        rf = _flip(u.right_foot, u.torso)
+
+
+
+
         return WorldTrackedUser(user_id=u.user_id,
-                                left_hand=lh, right_hand=rh,
-                                torso=u.torso,
-                                left_elbow=le, right_elbow=re,
-                                left_shoulder=ls, right_shoulder=rs)
+                                head=h, neck=n, torso=u.torso,
+                                left_shoulder=ls, left_elbow=le, left_hand=lh,
+                                right_shoulder=rs, right_elbow=re, right_hand=rh,
+                                left_hip=lhip, left_knee=lk, left_foot=lf,
+                                right_hip=rhip, right_knee=rk, right_foot=rf)
 
     def sync_stream(self):
         # After a long-running operation such as the TAS, a large amount of data
