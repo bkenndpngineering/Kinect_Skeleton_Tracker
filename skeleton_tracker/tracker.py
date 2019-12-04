@@ -34,13 +34,21 @@ class Tracker(object):
             return pitch(point(*map(float, elements)), -c.tracker.CAMERA_PITCH * DEG_TO_RAD)
         parts = payload.split(SEP_CHAR)
         return WorldTrackedUser(int(parts[0]),
-                                _parse_coords(parts[1]), # lhand
-                                _parse_coords(parts[2]), # rhand
+                                _parse_coords(parts[1]), # head
+                                _parse_coords(parts[2]), # neck
                                 _parse_coords(parts[3]), # torso
-                                _parse_coords(parts[4]), # lelbow
-                                _parse_coords(parts[5]), # relbow
-                                _parse_coords(parts[6]), # lshoulder
-                                _parse_coords(parts[7])) # rshoulder
+                                _parse_coords(parts[4]), # lshoulder
+                                _parse_coords(parts[5]), # lelbow
+                                _parse_coords(parts[6]), # lhand
+                                _parse_coords(parts[7]), # rshoulder
+                                _parse_coords(parts[8]), # relbow
+                                _parse_coords(parts[9]), # rhand
+                                _parse_coords(parts[10]), # lhip
+                                _parse_coords(parts[11]), # lknee
+                                _parse_coords(parts[12]), # lfoot
+                                _parse_coords(parts[13]), # rhip
+                                _parse_coords(parts[14]), # rknee
+                                _parse_coords(parts[15]), # rfoot
 
     @staticmethod
     def flip_user(u):
@@ -125,23 +133,6 @@ class Tracker(object):
     @classmethod
     def find_optimal_user(cls, users):
         def _is_valid(u):
-            # Check that distance between hands is large enough
-            hand_dist = dist(u.left_hand, u.right_hand)
-            if not hand_dist > c.tracker.MIN_HAND_DIST:
-                return False
-
-            # Check that hands are within +-45 degrees of vertical of elbows
-            r = u.relative_user
-            angles = []
-            for forearm in (r.left_forearm, r.right_forearm):
-                res = normalize_angle(math.atan2(forearm[1], forearm[0]))
-                angles.append(res)
-
-            if not any(angle_distance(a, math.pi / 2) < \
-                       c.tracker.HAND_ELBOW_ANGLE_TOLERANCE * DEG_TO_RAD
-                       for a in angles):
-                return False
-
             return True
 
         in_range = cls.filter_users_range(users)
