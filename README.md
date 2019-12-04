@@ -90,11 +90,14 @@ Original instructions can be found in install_instructions.txt!
 - [x] (Re)write Python parser for new tracking module
 - [x] Modify tracker.py
 - [x] Modify tracked_user.py
-- [ ] Write skeleton display - pygame
+- [x] Write skeleton display - pygame
+- [ ] Make skeleton display better
+
+(Current issues with skeleton: Head drawing needs to be updated to not use a limb, constant slouch breaks all right side tracking)
 
 - [ ] Fix the JSON, delete the physics and dab code
 - [ ] Rename trackhands to trackbody, modify trackers to use new name
-- [x] Update gitignore to ignore more files 
+- [x] Update gitignore to ignore more files
 
 ## Notes
 When running the code, it displays all the data but claims an error and "invalid line," will disregard and move on to skeleton drawing
