@@ -39,6 +39,10 @@ make
 
 
 # build OpenNNI2-FreenectDriver
+
+sudo apt install cmake make build-essential git
+
+
 sudo apt install libusb-dev
 # clone libfreenect git repo
 git clone https://github.com/OpenKinect/libfreenect
