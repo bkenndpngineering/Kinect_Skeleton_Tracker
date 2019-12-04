@@ -1,12 +1,12 @@
-# testing openni2 and nite2 python bindings
-
-import numpy as np
+# newer python bindings found at https://github.com/severin-lemaignan/openni-python, can be installed with pip3 openni
+from openni import openni2
 import cv2
-from primesense import openni2
+import numpy as np
 
-openni2.initialize("/usr/lib/")     # can also accept the path of the OpenNI redistribution
+openni2.initialize()     # can also accept the path of the OpenNI redistribution
 
 dev = openni2.Device.open_any()
+print(dev.get_device_info())
 
 depth_stream = dev.create_depth_stream()
 depth_stream.start()
@@ -25,6 +25,5 @@ while(True):
     cv2.imshow("image", img)
     cv2.waitKey(34)
 
-
-depth_stream.stop()
+depth_steam.stop()
 openni2.unload()
