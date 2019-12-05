@@ -66,26 +66,35 @@ Original instructions can be found in install_instructions.txt!
 
 ### File descriptions - short
 
-* /skeleton_tracker - Python Folder
-  * /skeleton_tracker/\_\_init\_\_.py
-  * /skeleton_tracker/\_\_main\_\_.py  - The file that is run by run_tracker.sh
-  * /skeleton_tracker/composition.py - File containing class with main loops
-  * /skeleton_tracker/config.json - A config file, if modified breaks the Json decoder.
-  * /skeleton_tracker/config.py - Reads config? Unsure of exactly what it does outside of being a config
-  * /skeleton_tracker/tracked_user.py - Classes for assigning data to the active user
-  * /skeleton_tracker/tracker.py - Converts tracking module (C) data to be used by python
-  * /skeleton_tracker/draw.py - Pygame code to draw the skeleton tracked
-* /tracking-module - C Tracker Folder
+* /NiTE_skeleton_tracker - Python Folder, NiTE skeleton tracking
+  * /NiTE_skeleton_tracker/\_\_init\_\_.py
+  * /NiTE_skeleton_tracker/\_\_main\_\_.py  - The file that is run by run_tracker.sh
+  * /NiTE_skeleton_tracker/composition.py - File containing class with main loops
+  * /NiTE_skeleton_tracker/config.json - A config file, if modified breaks the Json decoder.
+  * /NiTE_skeleton_tracker/config.py - Reads config? Unsure of exactly what it does outside of being a config
+  * /NiTE_skeleton_tracker/tracked_user.py - Classes for assigning data to the active user
+  * /NiTE_skeleton_tracker/tracker.py - Converts tracking module (C) data to be used by python
+  * /NiTE_skeleton_tracker/draw.py - Pygame code to draw the skeleton tracked
+  * /NiTE_skeleton_tracker/openni_nite2_test.py
+  * /NiTE_skeleton_tracker/openni_python_binding.py
+* /OpenNI2_skeleton_tracker - Python Folder, OpenNI2 skeleton tracking
+  * /OpenNI2_skeleton_tracker/Old - Old OpenNI2 files that were left in the NiTE folder
+    * /OpenNI2_skeleton_tracker/Old/openni_nite2_test.py
+    * /OpenNI2_skeleton_tracker/Old/openni_python_binding.py
+  * /OpenNI2_skeleton_tracker/openni_nite2_test.py
+* /tracking-module - C Tracker Folder - for NiTE
   * /tracking-module/main.cpp - C source code
   * /tracking-module/Makefile
-  * /tracking-module/trackbody - Compiled code, if it does not exist, run `make` in this directory.
+  * /tracking-module/trackbody - Compiled NiTE code, if it does not exist, run `make` in this directory.
 * /README.md - Readme
-* /run_tracker.sh - Used to run the tracker (the entire project)
+* /run_tracker.sh - Used to run the NiTE tracker
 
 ### File descriptions - long (as needed)
 
 
 ## Todo
+
+### NiTE
 - [x] Modify tracking-module code to return full body data instead of just hands
 - [x] (Re)write Python parser for new tracking module
 - [x] Modify tracker.py
@@ -95,14 +104,14 @@ Original instructions can be found in install_instructions.txt!
 - [ ] Add limb length setting in the endpoint calc
 - [ ] Make head drawing a neck and circle, not to limbs
 - [ ] Fix the slouch
+- [ ] Rewrite Angle code
 
 
 - [ ] Fix the JSON, delete the physics and dab code
 - [ ] Rename trackhands to trackbody, modify trackers to use new name
 - [x] Update gitignore to ignore more files
 
-## Notes
-When running the code, it displays all the data but claims an error and "invalid line," will disregard and move on to skeleton drawing
-The plan is to draw each line between joints as the same length, but change the angle of display and a fixed point. first fixed point will be the torso, at 0,0 or something
+### OpenNI2
 
-ERROR   | 2019-12-04 12:04:09,139 | skeleton_tracker.tracker | invalid line: b'BODY DATA: 1|(-17.44, 350.42, 932.55)|(-49.54, 131.72, 943.17)|(-71.62, -96.91, 947.37)|(93.86, 119.25, 1017.80)|(137.14, -184.46, 1070.43)|(204.34, -501.58, 1043.09)|(-192.95, 144.20, 868.54)|(-276.34, -146.31, 831.78)|(-281.21, -468.98, 769.79)|( 0.08, -333.71, 1000.37)|( 0.08, -793.19, 1000.37)|( 0.08, -1235.00, 1000.25)|(-187.48, -317.39, 902.76)|(-187.48, -776.87, 902.76)|(-187.47, -1218.68, 902.73)'
+- [ ] Kinetic Maze implementation: Add a bar drawn between user hands and display angle
+- [ ] Test with maze to see if it will track users after game is done/reset once game is over.
