@@ -8,3 +8,4 @@ Module for using Kinect for general purpose skeleton tracking
 
 ### Installing Dependencies
  `sudo apt install freenect libopenni2-0 libopenni2-dev opencv-python`
+ NiTE2 must be kept in the Skeleton tracker directory!
