@@ -14,8 +14,6 @@ Module for using Kinect for general purpose skeleton tracking
 2. Install OpenNI2: `sudo apt install libopenni2-0 libopenni2-dev`
 
 #### Install NiTE:
-Original instructions can be found in install_instructions.txt!
-
 1. Get NiTE:
   ```
   wget http://jaist.dl.sourceforge.net/project/roboticslab/External/nite/NiTE-Linux-x64-2.2.tar.bz2
