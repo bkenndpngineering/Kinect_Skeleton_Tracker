@@ -1,7 +1,7 @@
 # Kinect-Skeleton-Tracker
 Module for using Kinect for general purpose skeleton tracking
 
-**Note: While the general format of this will be the same as the Kinetic Maze project and Kinect Library, the files are not interchangeable**
+**Note: While the general format of the NiTE implementation will be the same as the Kinetic Maze project and Kinect Library, the files are not interchangeable**
 
 ## Dependencies
 [Libfreenect](https://github.com/OpenKinect/libfreenect),
