@@ -34,6 +34,8 @@ class Tracker:
 
         self.isDead = False
         self.frame = None
+        self.img_h = None
+        self.img_w= None
 
     def stop(self):
         self.isDead = True
@@ -43,8 +45,11 @@ class Tracker:
         Thread(target=self.update, args=()).start()
         return self
 
-    def getFrame(self):
-        return self.frame
+    def getFrame(self, width=1024):
+        if (self.img_h == None) or (self.img_w == None) or (self.frame is None):
+            return None
+        height = int(self.img_h * width / self.img_w)
+        return cv2.resize(self.frame, (width, height))
 
     def update(self):
 
