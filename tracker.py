@@ -3,7 +3,6 @@
 # By Braedan Kennedy (bkenndpngineering) and Andrew Xie (andrewxie43)
 
 import sys
-import argparse
 from openni import openni2, nite2, utils
 import numpy as np
 import cv2
