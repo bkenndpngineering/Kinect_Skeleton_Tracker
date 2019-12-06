@@ -1,16 +1,16 @@
 from tracker import Tracker
 import cv2
 
-try:
-    t = Tracker()
-    t.run()
-    while 1:
-        print(t.calculate_angle("RIGHT_HAND", "LEFT_HAND"))
-        f = t.getFrame()
-        cv2.imshow("img", f)
+t = Tracker()
+t.run()
 
-except Exception as e:
-    print(e)
+while 1:
+    f = t.getFrame()
+    print(t.calculate_angle("RIGHT_HAND", "LEFT_HAND"))
+    print("Frame gotten!")
+    if f is not None:
+        cv2.imshow("img", f)
+    print("Frame shown!")
 
 
 t.stop()

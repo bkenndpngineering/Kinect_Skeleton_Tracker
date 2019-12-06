@@ -43,12 +43,11 @@ class Tracker:
         Thread(target=self.update, args=()).start()
         return self
 
-    def getFrame(self, width):
-        win_w = width
-        win_h = int(self.img_h * win_w / self.img_w)
-        return cv2.resize(self.frame, (win_w, win_h))
+    def getFrame(self):
+        return self.frame
 
     def update(self):
+
         dev = self.init_capture_device()
 
         # display camera information
@@ -78,7 +77,7 @@ class Tracker:
             img = np.ndarray((depth_frame.height, depth_frame.width), dtype=np.uint16,
                              buffer=depth_frame_data).astype(np.float32)
             if use_kinect:
-                img = img[0:img_h, 0:img_w]
+                img = img[0:self.img_h, 0:self.img_w]
 
             (min_val, max_val, min_loc, max_loc) = cv2.minMaxLoc(img)
             if (min_val < max_val):
