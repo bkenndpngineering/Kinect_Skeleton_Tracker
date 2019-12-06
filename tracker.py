@@ -66,13 +66,6 @@ class Tracker:
 
         return math.degrees(theta)
 
-
-    def parse_arg(self):
-        parser = argparse.ArgumentParser(description='Test OpenNI2 and NiTE2.')
-        parser.add_argument('-w', '--window_width', type=int, default=1024,
-                            help='Specify the window width.')
-        return parser.parse_args()
-
     def draw_limb(self, img, ut, j1, j2, col):
         (x1, y1) = ut.convert_joint_coordinates_to_depth(j1.position.x, j1.position.y, j1.position.z)
         (x2, y2) = ut.convert_joint_coordinates_to_depth(j2.position.x, j2.position.y, j2.position.z)
@@ -90,6 +83,7 @@ class Tracker:
 
             c = GRAY_COLOR if (j2.positionConfidence < 1.0) else col
             cv2.circle(img, (int(x2), int(y2)), 2, c, -1)
+
     def draw_skeleton(self, img, ut, user, col):
         for idx1, idx2 in [(nite2.JointType.NITE_JOINT_HEAD, nite2.JointType.NITE_JOINT_NECK),
                            # upper body
@@ -117,20 +111,20 @@ class Tracker:
             self.capture_coordinates(ut, user.skeleton.joints[idx1])
             self.capture_coordinates(ut, user.skeleton.joints[idx2])
 
-
-    # -------------------------------------------------------------
-    # main program from here
-    # -------------------------------------------------------------
-
     def init_capture_device(self):
 
         openni2.initialize()
         nite2.initialize("/usr/lib/")
         # NiTE2 folder has to be in the same directory as this script!
         return openni2.Device.open_any()
+
     def close_capture_device(self):
         nite2.unload()
         openni2.unload()
+
+
+
+
     def capture_skeleton(self):
         args = self.parse_arg()
         dev = self.init_capture_device()
