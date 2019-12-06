@@ -33,6 +33,69 @@ class Tracker:
                             "RIGHT_FOOT": (None, None),
                             "RIGHT_KNEE": (None, None)}
 
+        self.isDead = False
+        self.frame = None
+
+    def stop(self):
+        self.isDead = True
+
+    def run(self):
+        # start main loop
+        Thread(target=self.update, args=()).start()
+        return self
+
+    def getFrame(self):
+        return self.frame
+
+    def update(self):
+        dev = self.init_capture_device()
+
+        # display camera information
+        dev_name = dev.get_device_info().name.decode('UTF-8')
+        print("Device Name: {}".format(dev_name))
+        use_kinect = False
+        if dev_name == 'Kinect':
+            use_kinect = True
+            print('using Kinect.')
+
+        # start nite2
+        try:
+            user_tracker = nite2.UserTracker(dev)
+        except utils.NiteError:
+            print("Unable to start the NiTE human tracker. Check "
+                  "the error messages in the console. Model data "
+                  "(s.dat, h.dat...) might be inaccessible.")
+            sys.exit(-1)
+
+        (img_w, img_h) = CAPTURE_SIZE_KINECT if use_kinect else CAPTURE_SIZE_OTHERS
+
+        while not self.isDead:
+            ut_frame = user_tracker.read_frame()
+
+            depth_frame = ut_frame.get_depth_frame()
+            depth_frame_data = depth_frame.get_buffer_as_uint16()
+            img = np.ndarray((depth_frame.height, depth_frame.width), dtype=np.uint16,
+                             buffer=depth_frame_data).astype(np.float32)
+            if use_kinect:
+                img = img[0:img_h, 0:img_w]
+
+            (min_val, max_val, min_loc, max_loc) = cv2.minMaxLoc(img)
+            if (min_val < max_val):
+                img = (img - min_val) / (max_val - min_val)
+            img = cv2.cvtColor(img, cv2.COLOR_GRAY2RGB)
+
+            if ut_frame.users:
+                for user in ut_frame.users:
+                    if user.is_new():
+                        print("new human id:{} detected.".format(user.id))
+                        user_tracker.start_skeleton_tracking(user.id)
+                    elif (user.state == nite2.UserState.NITE_USER_STATE_VISIBLE and
+                          user.skeleton.state == nite2.SkeletonState.NITE_SKELETON_TRACKED):
+                        self.draw_skeleton(img, user_tracker, user, (255, 0, 0))
+            self.frame = img
+
+        self.close_capture_device()
+
     def capture_coordinates(self, ut, j):
         (x, y) = ut.convert_joint_coordinates_to_depth(j.position.x, j.position.y, j.position.z)
 
@@ -121,69 +184,3 @@ class Tracker:
     def close_capture_device(self):
         nite2.unload()
         openni2.unload()
-
-
-
-
-    def capture_skeleton(self):
-        args = self.parse_arg()
-        dev = self.init_capture_device()
-
-        dev_name = dev.get_device_info().name.decode('UTF-8')
-        print("Device Name: {}".format(dev_name))
-        use_kinect = False
-        if dev_name == 'Kinect':
-            use_kinect = True
-            print('using Kinect.')
-
-        try:
-            user_tracker = nite2.UserTracker(dev)
-        except utils.NiteError:
-            print("Unable to start the NiTE human tracker. Check "
-                  "the error messages in the console. Model data "
-                  "(s.dat, h.dat...) might be inaccessible.")
-            sys.exit(-1)
-
-        (img_w, img_h) = CAPTURE_SIZE_KINECT if use_kinect else CAPTURE_SIZE_OTHERS
-        win_w = args.window_width
-        win_h = int(img_h * win_w / img_w)
-
-        while True:
-            ut_frame = user_tracker.read_frame()
-
-            depth_frame = ut_frame.get_depth_frame()
-            depth_frame_data = depth_frame.get_buffer_as_uint16()
-            img = np.ndarray((depth_frame.height, depth_frame.width), dtype=np.uint16,
-                             buffer=depth_frame_data).astype(np.float32)
-            if use_kinect:
-                img = img[0:img_h, 0:img_w]
-
-            (min_val, max_val, min_loc, max_loc) = cv2.minMaxLoc(img)
-            if (min_val < max_val):
-                img = (img - min_val) / (max_val - min_val)
-            img = cv2.cvtColor(img, cv2.COLOR_GRAY2RGB)
-
-            if ut_frame.users:
-                for user in ut_frame.users:
-                    if user.is_new():
-                        print("new human id:{} detected.".format(user.id))
-                        user_tracker.start_skeleton_tracking(user.id)
-                    elif (user.state == nite2.UserState.NITE_USER_STATE_VISIBLE and
-                          user.skeleton.state == nite2.SkeletonState.NITE_SKELETON_TRACKED):
-                        self.draw_skeleton(img, user_tracker, user, (255, 0, 0))
-
-            cv2.imshow("Depth", cv2.resize(img, (win_w, win_h)))
-            if (cv2.waitKey(1) & 0xFF == ord('q')):
-                break
-
-        self.close_capture_device()
-        cv2.destroyAllWindows()  # close OpenCV window
-
-    def stream(self):
-        skeleton_tracker_thread = Thread(target=self.capture_skeleton, args=())
-        skeleton_tracker_thread.start()
-
-        while True:
-            yield self.calculate_angle("LEFT_HAND", "RIGHT_HAND")
-
-        #capture_skeleton()
