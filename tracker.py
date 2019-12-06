@@ -43,8 +43,10 @@ class Tracker:
         Thread(target=self.update, args=()).start()
         return self
 
-    def getFrame(self):
-        return self.frame
+    def getFrame(self, width):
+        win_w = width
+        win_h = int(self.img_h * win_w / self.img_w)
+        return cv2.resize(self.frame, (win_w, win_h))
 
     def update(self):
         dev = self.init_capture_device()
@@ -66,7 +68,7 @@ class Tracker:
                   "(s.dat, h.dat...) might be inaccessible.")
             sys.exit(-1)
 
-        (img_w, img_h) = CAPTURE_SIZE_KINECT if use_kinect else CAPTURE_SIZE_OTHERS
+        (self.img_w, self.img_h) = CAPTURE_SIZE_KINECT if use_kinect else CAPTURE_SIZE_OTHERS
 
         while not self.isDead:
             ut_frame = user_tracker.read_frame()
