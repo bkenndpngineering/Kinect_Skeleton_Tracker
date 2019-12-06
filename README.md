@@ -55,10 +55,7 @@ Module for using Kinect for general purpose skeleton tracking
   cp libFreenectDriver.so libFreenectDriver.so.0 			# need to be a .so.0 for some reason
   ```
 
- NiTE2 must be kept in the same directory as tracker! Get the NiTE2 folder from the link above.
-
- If it does not work in the same directory (aka if the program complains that the libraries aren't in the right folder), move NiTE2 around based off where the error message says.
-
+ NiTE2 must be kept in the same directory as tracker! Copy the NiTE-Linux-x64-2.2/Redist/NiTE2 directory and its contents into the project directory (same place as script)
 
  Current code returns the angle between hands, change as needed.
 
