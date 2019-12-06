@@ -18,26 +18,24 @@ CAPTURE_SIZE_OTHERS = (640, 480)
 
 ############ BK junk ###############
 # dictionary updated as the joints are drawn
-coordinate_dict = {"HEAD": (None, None),
-                    "NECK": (None, None),
-                    "LEFT_SHOULDER": (None, None),
-                    "TORSO": (None, None),
-                    "RIGHT_SHOULDER": (None, None),
-                    "LEFT_HAND": (None, None),
-                    "LEFT_ELBOW": (None, None),
-                    "RIGHT_HAND": (None, None),
-                    "RIGHT_ELBOW": (None, None),
-                    "LEFT_HIP": (None, None),
-                    "RIGHT_HIP": (None, None),
-                    "LEFT_FOOT": (None, None),
-                    "LEFT_KNEE": (None, None),
-                    "RIGHT_FOOT": (None, None),
-                    "RIGHT_KNEE": (None, None)}
-
 class Tracker:
 
     def __init__(self):
-        pass
+        self.coordinate_dict = {"HEAD": (None, None),
+                            "NECK": (None, None),
+                            "LEFT_SHOULDER": (None, None),
+                            "TORSO": (None, None),
+                            "RIGHT_SHOULDER": (None, None),
+                            "LEFT_HAND": (None, None),
+                            "LEFT_ELBOW": (None, None),
+                            "RIGHT_HAND": (None, None),
+                            "RIGHT_ELBOW": (None, None),
+                            "LEFT_HIP": (None, None),
+                            "RIGHT_HIP": (None, None),
+                            "LEFT_FOOT": (None, None),
+                            "LEFT_KNEE": (None, None),
+                            "RIGHT_FOOT": (None, None),
+                            "RIGHT_KNEE": (None, None)}
 
     def capture_coordinates(self, ut, j):
         (x, y) = ut.convert_joint_coordinates_to_depth(j.position.x, j.position.y, j.position.z)
@@ -52,12 +50,12 @@ class Tracker:
         elif len(jointNameList) == 1:
             key = jointNameList[0]
 
-        coordinate_dict[key] = (x, y)
+        self.coordinate_dict[key] = (x, y)
     def calculate_angle(self, j1_name, j2_name):
-        # takes string, keys to the coordinate_dict
+        # takes string, keys to the self.coordinate_dict
         # returns degrees, angle relative to x axis
-        j1_coordinates = coordinate_dict[str(j1_name)]
-        j2_coordinates = coordinate_dict[str(j2_name)]
+        j1_coordinates = self.coordinate_dict[str(j1_name)]
+        j2_coordinates = self.coordinate_dict[str(j2_name)]
 
         if (j1_coordinates[0] == None) or (j1_coordinates[1] == None):
             #print("first joint has no coordinates")
@@ -219,7 +217,7 @@ CAPTURE_SIZE_OTHERS = (640, 480)
 
 ############ BK junk ###############
 # dictionary updated as the joints are drawn
-coordinate_dict = {"HEAD": (None, None),
+self.coordinate_dict = {"HEAD": (None, None),
                     "NECK": (None, None),
                     "LEFT_SHOULDER": (None, None),
                     "TORSO": (None, None),
@@ -253,12 +251,12 @@ class Tracker:
         elif len(jointNameList) == 1:
             key = jointNameList[0]
 
-        coordinate_dict[key] = (x, y)
+        self.coordinate_dict[key] = (x, y)
     def calculate_angle(self, j1_name, j2_name):
-        # takes string, keys to the coordinate_dict
+        # takes string, keys to the self.coordinate_dict
         # returns degrees, angle relative to x axis
-        j1_coordinates = coordinate_dict[str(j1_name)]
-        j2_coordinates = coordinate_dict[str(j2_name)]
+        j1_coordinates = self.coordinate_dict[str(j1_name)]
+        j2_coordinates = self.coordinate_dict[str(j2_name)]
 
         if (j1_coordinates[0] == None) or (j1_coordinates[1] == None):
             #print("first joint has no coordinates")
