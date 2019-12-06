@@ -51,6 +51,28 @@ class Tracker:
         height = int(self.img_h * width / self.img_w)
         return cv2.resize(self.frame, (width, height))
 
+    def get_coordinates(self, j_name):
+        j_coordinates = self.coordinate_dict[str(j_name)]
+
+        if (j_coordinates[0] == None) or (j_coordinates[1] == None):
+            return None
+
+        return j_coordinates
+
+    def calculate_difference(self, j1_name, j2_name):
+        j1_coordinates = self.coordinate_dict[str(j1_name)]
+        j2_coordinates = self.coordinate_dict[str(j2_name)]
+
+        if (j1_coordinates[0] == None) or (j1_coordinates[1] == None):
+            return None
+        elif (j2_coordinates[0] == None) or (j2_coordinates[1] == None):
+            return None
+
+        diff_x = abs(j2_coordinates[0] - j1_coordinates[0])
+        diff_y = abs(j2_coordinates[1] - j1_coordinates[1])
+
+        return (diff_x, diff_y)
+
     def update(self):
 
         dev = self.init_capture_device()
