@@ -48,8 +48,9 @@ class Tracker:
     def getFrame(self, width=1024):
         if (self.img_h == None) or (self.img_w == None) or (self.frame is None):
             return None
-        height = int(self.img_h * width / self.img_w)
-        return cv2.resize(self.frame, (width, height))
+        #height = int(self.img_h * width / self.img_w)
+        #return cv2.resize(self.frame, (width, height))
+        return self.frame
 
     def get_coordinates(self, j_name):
         j_coordinates = self.coordinate_dict[str(j_name)]
