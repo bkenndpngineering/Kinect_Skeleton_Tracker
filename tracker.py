@@ -45,12 +45,6 @@ class Tracker:
 
     def run(self):
         # start main loop
-        #Fake thread in an attempt to bypass packet loss bug - Paul's method for an unknown bug
-        Thread(name="faketrack",target=self.update, args=()).start()
-        time.sleep(4)
-        self.isDead = True
-        time.sleep(4)
-        self.isDead = False
         Thread(name="trackupdate",target=self.update, args=()).start()
         return self
 
