@@ -8,10 +8,13 @@ import numpy as np
 import cv2
 from threading import Thread
 import math
+import time
 
 GRAY_COLOR = (64, 64, 64)
 CAPTURE_SIZE_KINECT = (512, 424)
 CAPTURE_SIZE_OTHERS = (640, 480)
+
+#If packet loss persists, put camera on own thread
 
 class Tracker:
     def __init__(self):
@@ -42,8 +45,21 @@ class Tracker:
 
     def run(self):
         # start main loop
-        Thread(target=self.update, args=()).start()
+        #Fake thread in an attempt to bypass packet loss bug - Paul's method for an unknown bug
+        Thread(name="faketrack",target=self.update, args=()).start()
+        time.sleep(4)
+        self.isDead = True
+        time.sleep(4)
+        self.isDead = False
+        Thread(name="trackupdate",target=self.update, args=()).start()
         return self
+
+    def toggle(self):
+        self.isDead = True
+        time.sleep(4)
+        self.isDead = False
+        Thread(name="trackupdate",target=self.update, args=()).start()
+
 
     def getFrame(self, width=1024):
         if (self.img_h == None) or (self.img_w == None) or (self.frame is None):
