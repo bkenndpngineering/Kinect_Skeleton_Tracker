@@ -140,6 +140,12 @@ class Tracker:
 
         self.close_capture_device()
 
+    def checkUsers(self):
+        if ut_frame.users:
+            return True
+        return False
+
+
     def capture_coordinates(self, ut, j):
         (x, y) = ut.convert_joint_coordinates_to_depth(j.position.x, j.position.y, j.position.z)
 
