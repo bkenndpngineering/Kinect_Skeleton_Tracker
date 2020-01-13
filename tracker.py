@@ -45,12 +45,18 @@ class Tracker:
 
     def run(self):
         # start main loop
+        #Fake thread in an attempt to bypass packet loss bug - Paul's method for an unknown bug
+        Thread(name="fakeupdate",target=self.update, args=()).start()
+        time.sleep(5)
+        self.isDead = True
+        time.sleep(5)
+        self.isDead = False
+
         Thread(name="trackupdate",target=self.update, args=()).start()
         return self
 
     def toggle(self):
         self.isDead = True
-        time.sleep(4)
         self.isDead = False
         Thread(name="trackupdate",target=self.update, args=()).start()
 
@@ -133,12 +139,6 @@ class Tracker:
             self.frame = img
 
         self.close_capture_device()
-
-    def checkUsers(self):
-        if ut_frame.users:
-            return True
-        return False
-
 
     def capture_coordinates(self, ut, j):
         (x, y) = ut.convert_joint_coordinates_to_depth(j.position.x, j.position.y, j.position.z)
