@@ -221,4 +221,3 @@ class Tracker:
     def close_capture_device(self):
         nite2.unload()
         openni2.unload()
-S
