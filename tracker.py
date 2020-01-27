@@ -45,13 +45,6 @@ class Tracker:
 
     def run(self):
         # start main loop
-        #Fake thread in an attempt to bypass packet loss bug - Paul's method for an unknown bug
-        Thread(name="fakeupdate",target=self.update, args=()).start()
-        time.sleep(5)
-        self.isDead = True
-        time.sleep(5)
-        self.isDead = False
-
         Thread(name="trackupdate",target=self.update, args=()).start()
         return self
 
@@ -228,3 +221,4 @@ class Tracker:
     def close_capture_device(self):
         nite2.unload()
         openni2.unload()
+S
