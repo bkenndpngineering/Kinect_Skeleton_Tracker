@@ -130,8 +130,7 @@ class Tracker:
                           user.skeleton.state == nite2.SkeletonState.NITE_SKELETON_TRACKED):
                         self.draw_skeleton(img, user_tracker, user, (255, 0, 0))
             self.frame = img
-
-        self.close_capture_device()
+            self.close_capture_device()
 
     def capture_coordinates(self, ut, j):
         (x, y) = ut.convert_joint_coordinates_to_depth(j.position.x, j.position.y, j.position.z)
